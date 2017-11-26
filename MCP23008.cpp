@@ -90,28 +90,14 @@ uint8_t MCP23008::portRead() {
 uint8_t MCP23008::digitalRead(const uint8_t pin) {
   return bitRead(readReg(MCP_REG_GPIO), pin);
 }
-/*
-uint8_t MCP23008::portWrite(const bool state) {
-
-  if (state == LOW) {
-		return writeReg(MCP_REG_GPIO, 0x00);
-  }
-  else {
-		return writeReg(MCP_REG_GPIO, 0xFF);
-  }
-
-}
-*/
 
 uint8_t MCP23008::portWrite(const bool state) {
 
   if (state == LOW) {
 		GPIO_shadow = 0x00;
-		//return writeReg(MCP_REG_GPIO, 0x00);
   }
   else {
 		GPIO_shadow = 0xFF;
-		//return writeReg(MCP_REG_GPIO, 0xFF);
   }
 
 	return writeReg(MCP_REG_GPIO, GPIO_shadow);
@@ -129,24 +115,6 @@ uint8_t MCP23008::digitalWrite(const uint8_t pin, const bool state) {
 
   return writeReg(MCP_REG_GPIO, GPIO_shadow);
 }
-
-
-
-/*
-uint8_t MCP23008::digitalWrite(const uint8_t pin, const bool state) {
-
-  uint8_t registerData = readReg(MCP_REG_GPIO);
-
-  if (state == LOW) {
-		registerData &= ~(1 << pin);
-  }
-  else {
-		registerData |= (1 << pin);
-  }
-
-  return writeReg(MCP_REG_GPIO, registerData);
-}
-*/
 
 uint8_t MCP23008::enableInterrupt(const uint8_t pin, const uint8_t intMode) {
 
