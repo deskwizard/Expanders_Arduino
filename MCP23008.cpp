@@ -178,18 +178,38 @@ uint8_t MCP23008::intPinMode(const uint8_t intPinMode) {
   return writeReg(MCP_REG_IOCON, registerData);
 }
 
+// INTCAP = Port value
+// INTF = which pin
 
-uint8_t MCP23008::getInterrupts() {
-// read INTF first, reading INTCAP clears interrupts
+uint8_t MCP23008::getInterruptPin() {
+
 	uint8_t INTFRegisterData = readReg(MCP_REG_INTF);
-	uint8_t INTCAPRegisterData = readReg(MCP_REG_INTCAP);
+	uint8_t intPin = 0;
 
-	if (INTCAPRegisterData == INTFRegisterData) {
-		return INTCAPRegisterData;
+	for (uint8_t x = 0; x <= 7; x++) {
+
+		if (INTFRegisterData & (1 << x)) { // If bit is set this is the one
+			intPin = x;
+		}
+
 	}
-	else {
-		return INTFRegisterData;
+
+	return intPin;
+}
+
+uint8_t MCP23008::getInterruptPortValue() {
+	return readReg(MCP_REG_INTCAP);
+}
+
+uint8_t MCP23008::getInterruptPinValue(const uint8_t pin) {
+
+	bool pinValue = 0;
+
+	if (readReg(MCP_REG_INTCAP) & (1 << pin)) { // If the bit is set
+		pinValue = 1;
 	}
+
+	return pinValue;
 }
 
 /********** Private functions start ***********/
