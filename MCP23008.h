@@ -63,7 +63,6 @@ class MCP23008 {
 		uint8_t writeReg(const uint8_t MCPregister, const uint8_t data);
 
 		uint8_t GPIO_shadow = 0x00;
-
 };
 
 

@@ -101,7 +101,6 @@ uint8_t MCP23008::portWrite(const bool state) {
   }
 
 	return writeReg(MCP_REG_GPIO, GPIO_shadow);
-
 }
 
 uint8_t MCP23008::digitalWrite(const uint8_t pin, const bool state) {
@@ -163,7 +162,6 @@ uint8_t MCP23008::intPinMode(const uint8_t intPinMode) {
 
 	uint8_t registerData = readReg(MCP_REG_IOCON);
 
-
 	switch (intPinMode) {
 
 		case ACTIVE_LOW:
@@ -182,20 +180,15 @@ uint8_t MCP23008::intPinMode(const uint8_t intPinMode) {
   return writeReg(MCP_REG_IOCON, registerData);
 }
 
-// INTCAP = Port value
-// INTF = which pin
-
 uint8_t MCP23008::getInterruptPin() {
 
 	uint8_t INTFRegisterData = readReg(MCP_REG_INTF);
 	uint8_t intPin = 0;
 
 	for (uint8_t x = 0; x <= 7; x++) {
-
 		if (INTFRegisterData & (1 << x)) { // If bit is set this is the one
 			intPin = x;
 		}
-
 	}
 
 	return intPin;
