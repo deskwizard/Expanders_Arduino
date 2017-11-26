@@ -46,12 +46,11 @@ class MCP23008 {
 
 		uint8_t enableInterrupt(const uint8_t pin, const uint8_t intMode);
 		uint8_t disableInterrupt(const uint8_t pin);
-
 		uint8_t intPinMode(const uint8_t intPinMode);
-
 		uint8_t getInterruptPin();
 		uint8_t getInterruptPortValue();
 		uint8_t getInterruptPinValue(const uint8_t pin);
+		void clearInterrupts();
 
 #ifdef ESP8266
 		uint8_t begin(const uint8_t address, const uint8_t pinSDA, const uint8_t pinSCL);
@@ -62,6 +61,8 @@ class MCP23008 {
 
 		uint8_t readReg(const uint8_t reg);
 		uint8_t writeReg(const uint8_t MCPregister, const uint8_t data);
+
+		uint8_t GPIO_shadow = 0x00;
 
 };
 
