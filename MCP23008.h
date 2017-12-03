@@ -1,5 +1,5 @@
-#ifndef _MCP23008_h
-#define _MCP23008_h
+#ifndef MCP23008_h
+#define MCP23008_h
 
 // Register definitions
 #define MCP_REG_IODIR     0x00
@@ -57,10 +57,10 @@ class MCP23008 {
 #endif
 
 	private:
-		uint8_t expanderBusAddress = 0x20;	// Default to address 0x20 (All address pins low)
+		uint8_t chipAddr = 0x20;	// Default to address 0x20 (All address pins low)
 
-		uint8_t readReg(const uint8_t reg);
-		uint8_t writeReg(const uint8_t MCPregister, const uint8_t data);
+		uint8_t readRegister(const uint8_t registerAddr);
+		uint8_t writeRegister(const uint8_t registerAddr, const uint8_t registerData);
 
 		uint8_t GPIO_shadow = 0x00;
 };
