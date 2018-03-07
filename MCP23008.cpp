@@ -83,7 +83,7 @@ uint8_t MCP23008::invertInput(const uint8_t pin, const bool state) {
   return writeRegister(MCP_REG_IOPOL, registerData);
 }
 
-uint8_t MCP23008::portRead() {
+uint8_t MCP23008::readPort() {
   return readRegister(MCP_REG_GPIO);
 }
 
@@ -91,7 +91,7 @@ uint8_t MCP23008::digitalRead(const uint8_t pin) {
   return bitRead(readRegister(MCP_REG_GPIO), pin);
 }
 
-uint8_t MCP23008::portWrite(const bool state) {
+uint8_t MCP23008::writePort(const bool state) {
 
   if (state == LOW) {
 		GPIO_shadow = 0x00;

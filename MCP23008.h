@@ -38,10 +38,10 @@ class MCP23008 {
 
 		uint8_t invertInput(const uint8_t pin, const bool state);
 
-		uint8_t portRead();
+		uint8_t readPort();
 		uint8_t digitalRead(const uint8_t pin);
 
-		uint8_t portWrite(const bool state);
+		uint8_t writePort(const bool state);
 		uint8_t digitalWrite(const uint8_t pin, const bool state);
 
 		uint8_t enableInterrupt(const uint8_t pin, const uint8_t intMode);
